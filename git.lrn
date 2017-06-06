@@ -1,0 +1,15 @@
+/*
+ * git学习指南
+ * 2017/6/7 
+ */
+ 
+@配置
+$ git config --global user.name "liz"
+$ git config --global user.email "jiangjl027@foxmail.com"
+
+@创建版本框
+$ cd /d/tmp
+$ mkdir learn
+$ cd learn
+$ pwd
+/d/tmp/learn
