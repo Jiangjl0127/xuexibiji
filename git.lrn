@@ -13,3 +13,19 @@ $ mkdir learn
 $ cd learn
 $ pwd
 /d/tmp/learn
+$ git init
+Initialized empty Git repository in D:/tmp/learn/.git/
+
+@把文件添加到版本库
+$ git add git.lrn
+$ git commit -m "添加GIT学习笔记"
+[master (root-commit) 16e2f88] 添加GIT学习手册
+ 1 file changed, 15 insertions(+)
+ create mode 100644 git.lrn
+
+$ git commit -a 
+ 
+@时光穿梭机
+$ git status
+$ git diff git.lrn
+$ git commit -m "更新学习笔记"
