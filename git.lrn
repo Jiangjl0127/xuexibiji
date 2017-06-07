@@ -200,4 +200,11 @@ $ git show v0.9
 $ git tag -a v0.1 -m "version 0.1 released" 7777777
 $ git show v0.1
 
+$ git push origin v1.0
+$ git push origin --tags
+
+$ git tag -d v0.9
+$ git push origin :refs/rags/v0.9
+
+
  
