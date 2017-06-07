@@ -95,3 +95,8 @@ $ git merge dev
 
 $ git branch -d dev
 $ git branch
+
+$ git checkout master
+$ vim git.lrn
+$ git add git.lrn
+$ git commit -m "提交冲突"
