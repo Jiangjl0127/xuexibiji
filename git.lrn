@@ -65,4 +65,5 @@ $ ll
  
 @撤销修改
 $ git checkout -- git.lrn
+ -git checkout -- file 命令中的--很重要，没有--，就变成了"切换到另一个分支"的命令。
 
