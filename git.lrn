@@ -174,3 +174,30 @@ $ git push orgint dev
  -bug分支没必要推送
  -feature分支是否推送取决于是否是合作开发
  
+@抓取分支
+$ git checkout -b dev origin/dev
+ -多人协作的工作模式通常如下
+ -首先，可以试图用git push origin branch-name推送自己的修改
+ -如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并
+ -如果合并有冲突，则解决冲突，并在本地提交
+ -没有冲突或解决掉冲突后，再用git push origin branch-name推送就能成功
+ -如果git pull提示"no tracking information"，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name
+ 
+@标签管理
+ -Git标签是版本库的快照，但其实它就是指向某个commit的指针，跟分支很像，但是分支可以移动，标签不能移动。
+
+@创建标签
+$ git branch
+$ git checkout master
+$ git tag v1.0
+$ git tag
+
+$ git log --pretty=oneline --abbrev-commit
+$ git tag v0.9 6666666
+$ git tag
+$ git show v0.9
+
+$ git tag -a v0.1 -m "version 0.1 released" 7777777
+$ git show v0.1
+
+ 
