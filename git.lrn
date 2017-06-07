@@ -92,3 +92,6 @@ $ git add git.lrn
 $ git commit -m "提交文件到新分支" 
 
 $ git merge dev
+
+$ git branch -d dev
+$ git branch
