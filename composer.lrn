@@ -1,0 +1,121 @@
+#Composer是PHP的一个依赖管理工具。它允许你申请项目所有依赖的代码库，它会在你的项目中为你安装他们。
+#Composer不是一个包管理器。是的，它涉及"packages"和"libraries"，但它在每个项目的基础上进行管理，在你项目的某个目录中进行安装。默认情况下它不会在全局安装任何东西。因此，这仅仅是一个依赖管理。
+#Composer受到了note's npm和ruby's bundler的强烈启发。而当时PHP下并没有类似的工具。
+#Composer将这样为你解决问题：
+ -你有一个项目依赖于若干个库
+ -其中一些库依赖于其他库
+ -你声明你所依赖的东西
+ -Composer会找出哪个版本的包需要安装，并安装它们(将他们下载到你的项目中)
+
+@使用Composer
+ -如果当前目录下没有一个composer.json文件，需要创建一个，并在文件中指定require key的值
+{
+	"require":{
+		"monolog/monolog": "1.0.*"
+	}
+}
+ -require需要一个包名称(例如monolog/monolog)映射到包版本(例如1.0.*)的对象
+ -版本约束
+1.0.2
+>=1.0
+>=1.0,=1.0,=1.2 // >、>=、<、<=、!=  ,=>逻辑与 、|=>逻辑或
+1.0.*
+~1.2 // >=1.2,<2.0 意味着.2部分可以改变,但1.部分是固定的
+
+@安装依赖包
+php composer.phar install
+ *如果使用Git来管理项目，需要添加vendor到.gitignore文件中，避免把所有代码都添加到版本库中
+ -install命令将创建一个composer.lock文件到项目根目录中
+ 
+@composer.lock 
+ -锁文件
+ -在安装依赖后，Composer将把安装时确切的版本号列表写入composer.lock文件,这将锁定该项目的特定版本
+ -务必提交composer.json和composer.lock到版本库中
+ -install命令将会检查锁文件是否存在，如果存在，它将下载指定的版本(忽略composer.json文件中的定义)
+ -如果composer.lock文件存在,且依赖更新了新的版本，将不会获得任何更新，此时需要更新依赖版本需使用update命令
+
+php composer.phar install // composer install
+
+php composer.phar update [monolog/monolog ...]
+ 
+@Packagist
+ -packagist.org
+ -packagist是Composer的主要资源库。一个Composer的库基本上是一个包的源，可以使用require那里的任何包
+
+@自动加载
+ -可以加载Composer下载的库中所有的类文件。使用它，需要将下面这行代码添加到你项目的引导文件中
+require 'vendor/autoload.php';
+
+$log = new Monolog\Logger('name');
+$log->pushHandler(new Monolog\Handler\StreamHandler('app.log', Monolog\Logger::WARNING));
+
+$log->addWarning('Foo');
+
+ -可以在composer.json的autoload字段中增加自己的autoloader
+{
+	"autoload":{
+		"psr-4":{"Acme\\": "src/"}
+	}
+}
+ -添加autoload字段后，需要再次运行install命令生成vendor/autoload.php文件
+$loader = require 'vendor/autoload.php';
+$loader->add('Acme\\Test\\', __DIR__); 
+ -更多参考http://docs.phpcomposer.com/04-schema.html#autoload
+
+@每一个项目都是一个包
+ -只要有一个composer.json文件在目录中，那么整个目录就是一个包。当添加一个require到项目中，再创建一个依赖于其它库的包。项目与库之间的唯一区别是，项目是一个没有名字的包
+ -为了使项目成为一个可安装的包，需要为项目命名，通过composer.json中的name来定义
+{
+	"name": "acme/hello-world",
+	"require":{
+		"monolog/monolog": "1.0.*"
+	}
+}
+ -其中acme是供应商的名称。供应商的名称是必须填写的。
+ 
+@平台软件包
+ -Composer将那些已经安装在系统上，但并不是由Composer安装的包视为一个虚拟的平台软件包，这包括PHP本身，PHP扩展和一些系统库
+ -php 表示用户的PHP版本要求
+ -hhvm 代表的是HHVM运行环境的版本
+ -ext- 指定需要的PHP扩展库
+ -lib- 允许对PHP库的版本进行限制
+ -使用composer show --platform命令来获取可以的平台软件包的列表
+
+@知名版本
+{
+	"version": "1.0.0"
+}
+ -尽量避免手动设置版本号，因为标签的值必须与标签名相匹配
+ 
+@标签
+1.0.0
+v1.0.0
+1.10.5-RC1
+v4.4.4beta2
+v2.0.0-alpha
+v2.0.4-p1
+ -由于在需要require一个版本的约束时不允许创建带有前缀v的标签,因此v将被忽略
+ 
+@分支
+1.x
+1.0
+1.1.x
+ -当安装一个新的版本时，将会自动从它source中拉取
+ 
+@别名
+ -可以为dev-master设置别名1.0.x-dev，这样就可以通过require 1.0.x-dev来得到dev-master版本的包
+ 
+@发布到VCS(线上版本控制系统)
+{
+	"name": "jiangjl0127/composer_test",
+	"repositories":[
+		{
+			"type": "vcs",
+			"url": "https://git.oschina.net/jiangjl0127/qiehuanyuyan.git"
+		}
+	]
+	"require":{
+		"demo/qiehuanyuyan": "dev-master"
+	}
+}
+
