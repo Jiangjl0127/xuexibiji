@@ -154,4 +154,13 @@ $ git stash list
 $ git stash apply stash@{0}
 $ git stash drop
  
+@Feature分支
+ -每添加一个新功能，最好新建一个feature分支，在上面开发，完成后，合并，最后，删除该feature分支
+$ git checkout -b feature-fourhorsemen
+$ git add file
+$ git commit -m "增加新特性"
+
+$ git checkout dev
+ -销毁分支
+$ git branch -d feature-fourhorsemen
 
