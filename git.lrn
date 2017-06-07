@@ -101,3 +101,5 @@ $ git branch
 $ git checkout -b featurel
 
 $ vim git.lrn
+
+$ git branch -d featurel
