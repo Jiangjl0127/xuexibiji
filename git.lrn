@@ -55,3 +55,12 @@ $ git clone https://git.oschina.net/smeoa/smeoa.git
 $ git clone git@git.oschina.net:smeoa/smeoa.git
 $ cd smeoa/smeoa
 $ ll
+
+@工作区 ./
+@版本库 ./.git
+@暂存区 $ git status
+
+@管理修改
+ -为什么Git比其他版本控制系统设计得优秀，因为Git跟踪并管理的是修改，而非文件。
+ 
+
