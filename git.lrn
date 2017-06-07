@@ -66,4 +66,27 @@ $ ll
 @撤销修改
 $ git checkout -- git.lrn
  -git checkout -- file 命令中的--很重要，没有--，就变成了"切换到另一个分支"的命令。
+ -如果修改只是添加到了暂存区，还没有提交，可用命令get reset HEAD file把暂存区的修改撤销掉，重新放回工作区
+$ git reset HEAD git.lrn
+ -HEAD表示最新的版本
 
+@删除文件
+$ touch test.txt
+$ vim test.txt
+$ git add test.txt
+$ git commit -m "删除文件 -添加测试文件"
+
+$ rm test.txt
+$ git status
+ -现在有两个选择，一是确实要从版本库中删除该文件，那就用命令git rm test.txt删掉，并且git commit
+ -另一种情况是删错了，因为版本库里还有记录，所以可以用git checkout -- test.txt命令把误删的文件恢复到最新版本
+
+@分支管理
+@创建与合并分支
+$ git checkout -b dev
+ -$ git branch dev
+ -$ git checkout dev
+$ git branch
+
+$ git add git.lrn
+$ git commit -m "提交文件到新分支" 
