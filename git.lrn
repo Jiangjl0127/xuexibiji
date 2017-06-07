@@ -206,5 +206,18 @@ $ git push origin --tags
 $ git tag -d v0.9
 $ git push origin :refs/rags/v0.9
 
-
+@忽略特殊文件
+ -忽略某些文件时，需要编写.gitignore
+ -.gitignore文件本身要放到版本库里，并且可以对.gitignore做版本管理
+ 
+@别名配置
+$ git config --global alias st status
+$ git config --global alias co checkout
+$ git config --global alias ci commit
+$ git config --global alias br branch
+ -git reset HEAD file可以把暂存区的修改撤销掉，重新放回工作区
+$ git config --global alias unstage 'reset HEAD'
+ -配置Git时，加上--global是针对当前用户起作用，如果不加，那只针对当前仓库起作用
+ -配置文件放在每个仓库./git/config文件中
+ 
  
