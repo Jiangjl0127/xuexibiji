@@ -95,3 +95,9 @@ $ git merge dev
 
 $ git branch -d dev
 $ git branch
+
+@解决合并冲突
+ -人生不如意之事十之八九，合并分支往往也不是一帆风顺的
+$ git checkout -b featurel
+
+$ vim git.lrn
