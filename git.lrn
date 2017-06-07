@@ -151,6 +151,14 @@ $ git stash pop
 $ git stash list
 $ git stash apply stash@{0}
 $ git stash drop
+
+$ git branch -d feature-fourhorsemen
+error: The branch 'feature-fourhorsemen' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D feature-fourhorsemen'.
+
+$ git branch -D feature-fourhorsemen
+Deleted branch feature-fourhorsemen (was e42088d).
+
  
  
  
