@@ -108,3 +108,50 @@ $ git add git.lrn
 $ git commit -m "提交冲突"
 
 $ git branch -d featurel
+
+@分支管理策略
+$ git checkout -b dev
+$ vim git.lrn
+$ git add git.lrn
+$ git commit -m "dev分支下修改"
+
+$ git checkout master
+$ git merge --no-ff -m "merge with no-ff" dev
+$ git log --graph --pretty=oneline --abbrev-commit
+ -在实际开发中，我们应该按照几个基本原则进行分支管理
+ -首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；
+ -干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本
+ -开发团队成员每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了
+ -合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并
+ -http://www.liaoxuefeng.com/files/attachments/001384909239390d355eb07d9d64305b6322aaf4edac1e3000/0
+ -no-ff介绍 https://segmentfault.com/q/1010000002477106
+ 
+@Bug分支
+ -软件开发中，每个bug都可以通过一个新的临时分支来修复，修复后，合并分支，然后将临时分支删除
+$ git stash
+ -存储当前工作场景
+$ git status 
+ -查看工作区
+ -首先确定要在哪个分支上修复bug，假定需要在master分支上修复，就从master创建临时分支
+$ git checkout master
+$ git checkout -b bug-101
+
+$ git add bug-file
+$ git commit -m "修复BUG101"
+ -修复完成后，切换到master分支，并完成合并，最后删除bug-101分支
+$ git checkout master
+$ git merge --no-ff -m "合并BUG101分支" bug-101
+$ git branch -d bug-101
+ -完成修复后，回到dev分支干活
+$ git checkout dev
+$ git stash list
+ -工作现场还在，恢复有两个办法，一是用git stash apply恢复，但是恢复后，stash内容并不删除，需要用git stash drop来删除
+ -另一种方式是用git stash pop,恢复的同时把stash内容也删除了
+$ git stash pop
+$ git stash list
+$ git stash apply stash@{0}
+$ git stash drop
+ 
+ 
+ 
+ 
