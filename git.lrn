@@ -108,3 +108,5 @@ $ git add git.lrn
 $ git commit -m "提交冲突"
 
 $ git branch -d featurel
+
+#修复BUG
