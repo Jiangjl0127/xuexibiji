@@ -159,7 +159,18 @@ If you are sure you want to delete it, run 'git branch -D feature-fourhorsemen'.
 $ git branch -D feature-fourhorsemen
 Deleted branch feature-fourhorsemen (was e42088d).
 
- 
- 
- 
+@多人协作
+ -当从远程仓库克隆时，实际上Git自动把本地的master分支和远程的master分支对应起来，并且，远程仓库的默认名称是origin
+ -查看远程库信息
+$ git remote
+$ git remote -v
+ -如果没有推送权限，就看不到push的地址
+
+@推送分支
+$ git push origin master
+$ git push orgint dev
+ -master分支时刻与远程同步
+ -dev分支时刻与远程同步
+ -bug分支没必要推送
+ -feature分支是否推送取决于是否是合作开发
  
